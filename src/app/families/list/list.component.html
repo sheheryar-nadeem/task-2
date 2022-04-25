@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-md-12">
+        <h1>Families</h1>
+        <a routerLink="add" *ngIf="user?.userRole !== 'User'" class="btn btn-sm btn-success mb-2">Add Family Member</a>
+        <a routerLink="rca" class="btn btn-sm btn-primary mb-2 ml-2">Generate Graph</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th style="width: 30%">Name</th>
+                    <th style="width: 30%">Relation</th>
+                    <th style="width: 10%" *ngIf="user?.userRole !== 'User'"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let family of families">
+                    <td>{{family.name}}</td>
+                    <td>{{family.relation}}</td>
+                    <td *ngIf="user?.userRole !== 'User'" style="white-space: nowrap">
+                        <a routerLink="edit/{{family.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
+                        <button (click)="deleteMember(family.id)" class="btn btn-sm btn-danger btn-delete-user">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+                <tr *ngIf="!families">
+                    <td colspan="4" class="text-center">
+                        <span class="spinner-border spinner-border-lg align-center"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <h1 *ngIf="isAddMode">Add Member</h1>
+        <h1 *ngIf="!isAddMode">Edit Member</h1>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="form-row">
+                <div class="form-group col">
+                    <label for="name">Name</label>
+                    <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': !f?.name?.valid && f?.name?.touched }" />
+                    <div *ngIf="!f?.name?.valid && f?.name?.touched" class="invalid-feedback">
+                        Name is required
+                    </div>
+                </div>
+                <div class="form-group col">
+                    <label for="relation">Relation</label>
+                    <input type="text" formControlName="relation" class="form-control" [ngClass]="{ 'is-invalid': !f?.relation?.valid && f?.relation?.touched }" />
+                    <div *ngIf="!f?.relation?.valid && f?.relation?.touched" class="invalid-feedback">
+                        Relation is required
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button [disabled]="!form.valid" class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Save
+                </button>
+                <a routerLink="/families" class="btn btn-link">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
